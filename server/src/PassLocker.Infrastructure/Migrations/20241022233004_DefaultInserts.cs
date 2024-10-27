@@ -24,14 +24,14 @@ namespace PassLocker.Infrastructure.Migrations
                 }
             );
 
-            // migrationBuilder.InsertData(
-            //     table: "Owner",
-            //     columns: new[] { "owner_password" },
-            //     values: new object[]
-            //     {
-            //         "admin123"
-            //     }
-            // );
+            migrationBuilder.InsertData(
+                table: "Owner",
+                columns: new[] { "owner_password" },
+                values: new object[]
+                {
+                    "neasyq3NiuemBwQJdaI1bg==1vRBC7g9arojNgLGJWjT+Q==pZuh/YqtpMHAaChx/E6klw=="
+                }
+            );
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
