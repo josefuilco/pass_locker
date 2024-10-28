@@ -22,5 +22,5 @@ Las funcionalidades con las que cuenta la aplicación.
 * [X] Generación de contraseñas seguras.
 * [X] Autenticación segura con contraseña maestra.
 * [X] Categorización y busqueda rapida.
-* [] Protección por tiempo - 30 minutos como maximo el token.
+* [X] Protección por tiempo - 30 minutos como maximo la cookie.
 * [] Restricción de acceso de datos por intentos fallidos por 24 horas.
