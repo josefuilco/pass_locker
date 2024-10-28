@@ -41,7 +41,7 @@ public class EfPlatformRepository : IPlatformRepository
 			?? throw new Exception("Platform not found");
 		currentPlatform.Name = platform.Name;
 		currentPlatform.UrlImage = platform.UrlImage;
-		currentPlatform.Category!.Id = platform.Category!.Id;
+		currentPlatform.CategoryId = platform.CategoryId;
 		await dbContext.SaveChangesAsync();
     }
 }

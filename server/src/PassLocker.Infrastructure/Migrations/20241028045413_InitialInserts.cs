@@ -4,7 +4,7 @@
 
 namespace PassLocker.Infrastructure.Migrations
 {
-    public partial class DefaultInserts : Migration
+    public partial class InitialInserts : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

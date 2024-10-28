@@ -5,7 +5,7 @@ using MySql.EntityFrameworkCore.Metadata;
 
 namespace PassLocker.Infrastructure.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class InitialCreation : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -66,14 +66,14 @@ namespace PassLocker.Infrastructure.Migrations
                     platform_name = table.Column<string>(type: "varchar(25)", maxLength: 25, nullable: false),
                     platform_urlimage = table.Column<string>(type: "varchar(150)", maxLength: 150, nullable: true),
                     platform_state = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    CategoryId = table.Column<int>(type: "int", nullable: false)
+                    category_id = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("platform_id", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Platform_Category_CategoryId",
-                        column: x => x.CategoryId,
+                        name: "FK_Platform_Category_category_id",
+                        column: x => x.category_id,
                         principalTable: "Category",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -86,23 +86,23 @@ namespace PassLocker.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    account_name = table.Column<string>(type: "varchar(25)", maxLength: 25, nullable: false),
+                    account_name = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false),
                     account_password = table.Column<string>(type: "varchar(120)", maxLength: 120, nullable: false),
-                    PlatformId = table.Column<int>(type: "int", nullable: false),
-                    TagId = table.Column<int>(type: "int", nullable: false)
+                    platform_id = table.Column<int>(type: "int", nullable: false),
+                    tag_id = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("account_name", x => x.Id);
+                    table.PrimaryKey("account_id", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Account_Platform_PlatformId",
-                        column: x => x.PlatformId,
+                        name: "FK_Account_Platform_platform_id",
+                        column: x => x.platform_id,
                         principalTable: "Platform",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Account_Tag_TagId",
-                        column: x => x.TagId,
+                        name: "FK_Account_Tag_tag_id",
+                        column: x => x.tag_id,
                         principalTable: "Tag",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -110,19 +110,19 @@ namespace PassLocker.Infrastructure.Migrations
                 .Annotation("MySQL:Charset", "utf8mb4");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Account_PlatformId",
+                name: "IX_Account_platform_id",
                 table: "Account",
-                column: "PlatformId");
+                column: "platform_id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Account_TagId",
+                name: "IX_Account_tag_id",
                 table: "Account",
-                column: "TagId");
+                column: "tag_id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Platform_CategoryId",
+                name: "IX_Platform_category_id",
                 table: "Platform",
-                column: "CategoryId");
+                column: "category_id");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

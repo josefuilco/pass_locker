@@ -73,8 +73,13 @@ public class PassLockerDbContext : DbContext
 			.HasColumnName("platform_state")
 			.IsRequired();
 
+			platform.Property(p => p.CategoryId)
+			.HasColumnName("category_id")
+			.IsRequired();
+
 			platform.HasOne(p => p.Category)
 			.WithMany(P => P.Platforms)
+			.HasForeignKey(p => p.CategoryId)
 			.IsRequired();
 		});
 
@@ -119,12 +124,22 @@ public class PassLockerDbContext : DbContext
 			.HasMaxLength(120)
 			.IsRequired();
 
+			account.Property(a => a.PlatformId)
+			.HasColumnName("platform_id")
+			.IsRequired();
+
+			account.Property(a => a.TagId)
+			.HasColumnName("tag_id")
+			.IsRequired();
+
 			account.HasOne(a => a.Platform)
 			.WithMany(a => a.Accounts)
+			.HasForeignKey(a => a.PlatformId)
 			.IsRequired();
 
 			account.HasOne(a => a.Tag)
 			.WithMany(a => a.Accounts)
+			.HasForeignKey(a => a.TagId)
 			.IsRequired();
 		});
 	}

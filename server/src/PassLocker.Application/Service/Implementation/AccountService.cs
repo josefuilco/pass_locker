@@ -25,7 +25,7 @@ public class AccountService : IAccountService
         await repository.SaveAccountAsync(account);
 	}
 
-	public async Task CreateAccountWithoutPassword(Account account, IPasswordGenerator generator)
+	public async Task CreateAccountWithoutPasswordAsync(Account account, IPasswordGenerator generator)
     {
         account.Password = encryptService.Encode(generator.GeneratePassword());
 		await repository.SaveAccountAsync(account);

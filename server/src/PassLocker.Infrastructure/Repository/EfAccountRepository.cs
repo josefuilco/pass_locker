@@ -16,7 +16,11 @@ public class EfAccountRepository : IAccountRepository
 
 	public async Task<IEnumerable<Account>> GetAccountsByCategoryAsync(int categoryId)
 	{
-		var accounts = await dbContext.Account!.Where(a => a.Id == categoryId).ToListAsync()
+		var accounts = await dbContext.Account!
+			.Include(a => a.Platform)
+			.Include(a => a.Tag)
+			.Where(a => a.Platform!.CategoryId == categoryId)
+			.ToListAsync()
 			?? throw new Exception("Accounts by category not found");
 		return accounts;
 	}
@@ -39,8 +43,8 @@ public class EfAccountRepository : IAccountRepository
 			?? throw new Exception("Account not found for update");
 		currentAccount.Name = account.Name;
 		currentAccount.Password = account.Password;
-		currentAccount.Platform!.Id = account.Platform!.Id;
-		currentAccount.Tag!.Id = account.Tag!.Id;
+		currentAccount.PlatformId = account.PlatformId;
+		currentAccount.TagId = account.TagId;
 		await dbContext.SaveChangesAsync();
 	}
 }

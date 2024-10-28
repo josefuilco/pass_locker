@@ -2,13 +2,17 @@ using System.ComponentModel.DataAnnotations;
 
 namespace PassLocker.Web.Request;
 
-public record TagCreationRequest(
+public record AccountRequest(
 	[Required]
 	[MinLength(1)]
-	[MaxLength(25)]
+	[MaxLength(50)]
 	string Name,
 	[Required]
 	[MinLength(1)]
-	[MaxLength(150)]
-	string Description
+	[MaxLength(32)]
+	string Password,
+	[Required]
+	int PlatformId,
+	[Required]
+	int TagId
 );

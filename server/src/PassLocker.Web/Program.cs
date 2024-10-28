@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using PassLocker.Application;
 using PassLocker.Infrastructure;
 using PassLocker.Infrastructure.Connection;
+using PassLocker.Web.Configuration;
 
 var myAllowSpecificOrigin = "MyAllowSpecificOrigin";
 
@@ -13,13 +14,16 @@ builder.Services.AddCors(options =>
         policy.WithOrigins("http://localhost:5173")
             .WithHeaders(new string[] {
                 "Content-Type: application/json"
-            }).AllowAnyMethod()));
+            }).AllowAnyMethod()
+            .AllowCredentials()));
 
 builder.Services.AddControllers().AddJsonOptions(options =>
     options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddSingleton<CookieConfiguration>();
 
 builder.Services
     .AddApplication()
